@@ -1,0 +1,147 @@
+﻿{% load staticfiles %}   
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}" />-
+<link rel="stylesheet" type="text/css" href="{% static 'store/content/bootstrap.min.css' %}" />-->
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+
+
+<link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+<!--<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>-->
+<link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}"/>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
+<!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+
+        <!--Logo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">Главная</a>
+        </div>
+
+        <!--Items-->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-paperclip" aria-hidden ="true"></span>&nbsp;
+                        Albums
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-music" aria-hidden ="true"></span>&nbsp;
+                        Music
+                    </a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="" />
+                </div>
+                    <button type="submit" class="btn btn-default">Поиск</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="{% url 'add' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden ="true"></span>&nbsp;
+                        Добавить
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden ="true"></span>&nbsp;
+                        Выход
+                    </a>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </div>
+</nav>
+
+<!--
+    <form method="post">
+        {% csrf_token %}
+        {{ SGForm.as_p }}
+        <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="hidden" name="next" value="/" />
+            <input type="submit" value="Отправить" class="btn btn-default" />
+        </div>
+        </div>
+
+</form>
+-->
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            <form action="." method="post" class="form-horizontal">
+                {% csrf_token %}
+                <h4>Внесите данные добавляемого товара</h4>
+                <hr />
+                <div class="form-group">
+                    <label for="id_username" class="col-md-2 control-label">User ID</label>
+                    <div class="col-md-10">
+                        {{ SGForm.userId }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_productName" class="col-md-2 control-label">Название</label>
+                    <div class="col-md-10">
+                        {{ SGForm.productName }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_description" class="col-md-2 control-label">Описание</label>
+                    <div class="col-md-10">
+                        {{ SGForm.description }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_price" class="col-md-2 control-label">Цена</label>
+                    <div class="col-md-10">
+                        {{ SGForm.price }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_category" class="col-md-2 control-label">Категория</label>
+                    <div class="col-md-10">
+                        {{ SGForm.category}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="hidden" name="next" value="/" />
+                        <input type="submit" value="Отправить" class="btn btn-default" />
+                    </div>
+                </div>
+                {% if form.errors %}
+                <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm"></section>
+    </div>
+</div>
+
+
+
+
+    <script src="{% static 'store/scripts/bootstrap.mmin.js' %}"></script>
