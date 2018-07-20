@@ -1,7 +1,5 @@
+from django.contrib.auth.models import User
 from django import forms 
-
-
-
 
 
 class ProductApplyForm(forms.Form):
@@ -13,3 +11,10 @@ class ProductApplyForm(forms.Form):
     category = forms.CharField(max_length=20)
     image = forms.FileField()
     #CreateDate = forms.DateTimeField()
+
+class UserForm(forms.ModelForm):
+        password = forms.CharField(widget = forms.PasswordInput)
+
+        class Meta:
+            model = User
+            fields = ['username', 'email', 'password']
