@@ -62,7 +62,7 @@ class UserFormView(View):
     form_class = UserForm
     template_name = 'store/rwgistration_form.html'
 
-    # отображение формы регистрации
+    # получение данных из формы регистрации и сохранение в базе
     def get(self, request):
         form = self.form_class(None)
         return render(request, self.template_name, {'form':form})
@@ -78,3 +78,11 @@ class UserFormView(View):
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()
+
+    # возвращает объект пользователя, если данные корректны
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('store:index')
+        return render(request, self.template_name, {'form':form})
