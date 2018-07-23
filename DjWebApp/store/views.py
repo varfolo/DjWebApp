@@ -60,7 +60,7 @@ def item(request, prod_id):
 
 class UserFormView(View):
     form_class = UserForm
-    template_name = 'store/rwgistration_form.html'
+    template_name = 'store/index.html'
 
     # получение данных из формы регистрации и сохранение в базе
     def get(self, request):
