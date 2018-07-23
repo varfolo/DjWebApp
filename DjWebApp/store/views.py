@@ -85,4 +85,4 @@ class UserFormView(View):
                 if user.is_active:
                     login(request, user)
                     return redirect('store:index')
-        return render(request, self.template_name, {'form':form})
+        return render(request, self.template_name, {'form':form}) 

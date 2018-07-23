@@ -68,7 +68,7 @@
     <Folder Include="store\static\" />
     <Folder Include="store\static\store\" />
     <Folder Include="store\static\store\content\" />
-    <Folder Include="G:\Public\DjWebApp\DjWebApp\store\static\store\scripts\" />
+    <Folder Include="store\static\store\scripts\" />
     <Folder Include="store\static\store\images\" />
     <Folder Include="store\static\store\scripts\" />
     <Folder Include="store\templates\" />
