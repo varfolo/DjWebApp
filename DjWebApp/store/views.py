@@ -11,6 +11,11 @@ from django.views import generic
 from django.views.generic import View
 from store.forms import UserForm
 
+ #if 'email' in self.cleaned_data and 'email2' in self.cleaned_data:
+ #           if self.cleaned_data['email'] != self.cleaned_data['email2']:
+ #               raise forms.ValidationError(_(u'You must type the same email each time'))
+ #       return self.cleaned_data
+
 
 def index(request):
     form = UserForm(request.POST or None)
