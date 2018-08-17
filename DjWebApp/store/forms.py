@@ -13,7 +13,8 @@ class ProductApplyForm(forms.Form):
     #CreateDate = forms.DateTimeField()
 
 class UserForm(forms.ModelForm):
-        password = forms.CharField(widget = forms.PasswordInput, label="Пароль")
+        password = forms.CharField(widget = forms.PasswordInput(attrs={'class':'form-control'}), label="Пароль")
+#        email = forms.CharField(widget = forms.EmailInput(attrs={'class':'form-control'}), label="Адрес электронной почты")
 
         class Meta:
             model = User

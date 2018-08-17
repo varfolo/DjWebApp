@@ -1,4 +1,7 @@
-﻿{% load staticfiles %}   
+﻿{% extends 'store/base.html' %}
+
+{% block body %}
+{% load staticfiles %}   
 
 
 <head>
@@ -44,75 +47,72 @@ $(document).ready(function(){
     <div id="map" style="height:300px" class="container-fluid">
     </div></br>
 
-    <a href="#myModal" class="btn btn-primary" data-toggle="modal">Modal view</a>
+        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#regForm">Регистрация</a>
+    <!--<a href="#btnModal" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm>Modal view</a>-->
+    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>-->
 
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    <h3 class="modal-title">Создать учётную запись</h3>
-                 </div>
+    <div class="modal fade" id="regForm" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      <div class="modal-dialog  modal-sm">
+        <div class="modal-content">
+          <!-- Заголовок модального окна -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Созать учётную запись</h4>
+          </div>
 
-                 <div class="modal-body">
-                 <!--   <div class="container-fluid">-->
-                      <div class="container">
-                          <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-                                      {% csrf_token %}
-                                    <!--  {% for field in form %}
-                                         {{ field.errors }}
-                                         {{ field.label_tag }}
-                                         {{ field }}
-                                     {% endfor %} -->
-                          <div>
-                            <td>{{ form.username.label_tag }}</td>
-                            <td>{{ form.username }}</td>
-                          </div>
-                          <div>
-                            <td>{{ form.email.label_tag }}</td>
-                            <td>{{ form.email }}</td>
-                          </div>
-                          <div>
-                            <td>{{ form.password.label_tag }}</td>
-                            <td>{{ form.password }}</td>
-                          </div>
-
-                          <div class="form-group>
-                              <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <input type="hidden" name="next" value="{{ next }}" />
-                              </div>
-                          </div>
-                          </form>             
-
-
-                                   <!-- <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                        
-                                    </div>-->
-      
-                                <div class="panel-footer">
-                                    Уже есть учётная запись? <a href="#">Нажмите здесь</a> чтобы войти.
-                                </div>
-
+          <!-- Основное содержимое модального окна -->
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <form data-toggle="validator" role="form" method="post" >
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="id_username" class="control-label">Ваше имя</label>
+                      <input type="text" name="username" class="form-control" required id="id_username" placeholder="Введите Ваше имя">
                     </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <div class="form-group">
+                      <label for="id_email" class="control-label">Ваш E-mail</label>
+                      <input type="email" name="email" class="form-control" id="id_email" placeholder="Email" data-error="Вы не правильно ввели Ваш E-mail" required>
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="id_password" class="control-label">Введите пароль</label>
+                      <input type="password" name="password" data-toggle="validator" data-minlength="6" class="form-control" required id="id_password" placeholder="123456" >
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="id_password" class="control-label">Повторите пароль</label>
+                      <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#id_password" data-match-error="Ошибка! Пароли не совпадают!" placeholder="Повторите пароль" required>
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Отправить</button>
+                    </div>
+                  </form>
+
+                  <div class="panel-footer">
+                    Уже есть учётная запись? <a href="#">Нажмите здесь</a> чтобы войти.
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Футер модального окна -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+          </div>
         </div>
+      </div>
     </div>
-
-   
- 
-
-
 
 </body>
 
-
+{% endblock %}
 
 
