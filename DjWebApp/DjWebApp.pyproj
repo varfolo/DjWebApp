@@ -105,7 +105,9 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="store\static\store\content\bootstrap.css" />
     <Content Include="store\static\store\content\bootstrap.min.css" />
+    <Content Include="store\static\store\content\site.css" />
     <Content Include="store\static\store\images\background.png" />
     <Content Include="store\static\store\scripts\bootstrap.min.js" />
     <Content Include="store\static\store\style.css" />
