@@ -17,11 +17,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}"/>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
-</head>
 
-
-    <body>
-        <nav class="navbar navbar-inverse">
+            <nav class="navbar navbar-inverse">
         <div class="container-fluid">
 
 
@@ -85,9 +82,14 @@
 
     </div>
 </nav>
+</head>
+
+
+<body>
+
         {% block body %}
         {% endblock %}
-    </body>
+</body>
 </html>
 
 
@@ -97,7 +99,7 @@
 
 
 
-  <!--  {% if all_products %}
+    {% if all_products %}
         <ul>
             {% for product in all_products %}
             <li><a href="/item/{{ product.id }}/">{{ product.productName }}</a></li>
@@ -106,7 +108,7 @@
     {% else %}
         <h3>There is no products in the databade</h3>
     {% endif %}
-      -->
+      
 
 
 
