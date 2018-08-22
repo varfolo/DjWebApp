@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views import generic
 from django.views.generic import View
 from store.forms import UserForm
@@ -17,7 +17,9 @@ from store.forms import UserForm
  #       return self.cleaned_data
 
 
+
 def index(request):
+    print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл')
     form = UserForm(request.POST or None)
     all_products = UserProduct.objects.all()
     if form.is_valid():
@@ -31,10 +33,31 @@ def index(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'store/index.html', {"form": form})
+                return render(request, 'store/addproduct.html', {"form": form})
+
+
+#        username = request.POST['username']
+#        password = request.POST['password']
+#        user = authenticate(request, username=username, password=password)
+#        if user is not None:
+#                Login(request, user)
+#            print(user.is_uathenticated)
+#            return redirect ('/addproduct.html')
 
     return render(request,'store/index.html', {"form": form})
 
+#def login(request):
+#        if request.method == "POST":
+#            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл2')
+#            print(user.is_uathenticated)
+#            username = request.POST['username']
+#            password = request.POST['password']
+#            user = authenticate(username=username, password=password)
+#            if user is not None:
+#                if user.is_active:
+#                    Login(request, user)
+#                print(user.is_uathenticated)
+#                return redirect ('/addproduct.html')
 #    context = {
  #        'all_products': all_products, "form": form,
  #        }
@@ -86,21 +109,21 @@ def item(request, prod_id):
     return render(request,'store/item.html', contextItem)
    # return HttpResponse("<h2>Здесть можно увидеть детали интересующих товарров</h2>" + str(prod_id))
 
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                albums = Album.objects.filter(user=request.user)
-                return render(request, 'music/index.html', {'albums': albums})
-            else:
-                return render(request, 'music/login.html', {'error_message': 'Your account has been disabled'})
-        else:
-            return render(request, 'music/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'music/login.html')
+#def login_user(request):
+#    if request.method == "POST":
+#        username = request.POST['username']
+#        password = request.POST['password']
+#        user = authenticate(username=username, password=password)
+#        if user is not None:
+#            if user.is_active:
+#                login(request, user)
+#                albums = Album.objects.filter(user=request.user)
+#                return render(request, 'store/index.html', {'albums': albums})
+#            else:
+#                return render(request, 'music/login.html', {'error_message': 'Your account has been disabled'})
+#        else:
+#            return render(request, 'music/login.html', {'error_message': 'Invalid login'})
+#    return render(request, 'music/login.html')
 
 
 def register(request):
@@ -119,34 +142,12 @@ def register(request):
                 return render(request, 'music/index.html', {'albums': albums})
     context = {
         "form": form,
-    }
+    }  
     return render(request, 'store/index.html', context)
-   
-#class UserFormView(View):
-#    form_class = UserForm
-#    template_name = 'store/index.html'
 
-    # получение данных из формы регистрации и сохранение в базе
-#    def get(self, request):
-#        form = self.form_class(None)
-#        return render(request, self.template_name, {'form':form})
-            
-#    def post(self, request):
-#        form = self.form_class(request.Post)
-
-#        if form.is_valid():
-
-#            user = form.save(commit=False)
-
-#            username = form.cleaned_data['username']
-#            password = form.cleaned_data['password']
-#            user.set_password(password)
-#            user.save()
-
-    # возвращает объект пользователя, если данные корректны
-#            user = authenticate(username=username, password=password)
-#            if user is not None:
-#                if user.is_active:
-#                    login(request, user)
-#                    return redirect('store:index')
-#        return render(request, self.template_name, {'form':form}) 
+def log_out(request):
+    logout(request)
+    # Перенаправление на страницу.
+   # return HttpResponse("store/addproduct.html")
+    #return render(request, 'store/addproduct.html')
+    return redirect('/add')
