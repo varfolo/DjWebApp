@@ -19,7 +19,7 @@ from store.forms import UserForm
 
 
 def index(request):
-    print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл')
+
     form = UserForm(request.POST or None)
     all_products = UserProduct.objects.all()
     if form.is_valid():
@@ -29,11 +29,42 @@ def index(request):
         user.set_password(password)
         user.save()
 
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
+        print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл22 '+ 'username '+username+' password '+password+' user '+user)
         if user is not None:
+            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл222')
             if user.is_active:
                 login(request, user)
                 return render(request, 'store/addproduct.html', {"form": form})
+    return render(request,'store/index.html', {"form": form})
+
+
+  #  username = request.POST['username']
+  #  password = request.POST['password']
+  #  user = authenticate(request, username=username, password=password)
+  #  if user is not None:
+  #      login(request, user)
+  #      # Redirect to a success page.
+  #      ...
+  #  else:
+        # Return an 'invalid login' error message.
+
+def log_in(request):
+    print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл2')
+    form = UserForm(request.POST or None)
+    username = request.POST['username']
+    password = request.POST['password']
+
+    if form.is_valid():
+        authuser = authenticate(username=username, password=password)
+        print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл22 '+ 'username '+username+' password '+password+' user ')
+        if authuser is not None:
+            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл222')
+            if authuser.is_active:
+                login(request, authuser)
+                return render(request, 'store/addproduct.html', {"form": form})
+        else:
+            print(' authuserUser is None')
 
 
 #        username = request.POST['username']
@@ -44,7 +75,7 @@ def index(request):
 #            print(user.is_uathenticated)
 #            return redirect ('/addproduct.html')
 
-    return render(request,'store/index.html', {"form": form})
+
 
 #def login(request):
 #        if request.method == "POST":

@@ -48,19 +48,21 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                    <a href="{% url 'add' %}">
-                        <span class="glyphicon glyphicon-plus" aria-hidden ="true"></span>&nbsp;
-                        Добавить
-                    </a>
-                </li>
+
 
 
                 {% if user.is_authenticated %}
                     <li class="">
+                      <a href="{% url 'add' %}">
+                          <span class="glyphicon glyphicon-plus" aria-hidden ="true"></span>&nbsp;
+                          Добавить
+                      </a>
+                    </li>
+
+                    <li class="">
                         <a href="{% url 'logout' %}">
                             <span class="glyphicon glyphicon-plus" aria-hidden ="true"></span>&nbsp;
-                            Выход|{{ user }}
+                            Выход | {{ user }}
                         </a>
                     </li>
                 {% else %}
@@ -169,15 +171,15 @@
                       <label for="id_username" class="control-label">Ваше имя</label>
                       <input type="text" name="username" class="form-control" required id="id_username" placeholder="Введите Ваше имя">
                     </div>
-
+                     <!--data-toggle="validator" data-minlength="6"--> 
                     <div class="form-group">
                       <label for="id_password" class="control-label">Введите пароль</label>
-                      <input type="password" name="password" data-toggle="validator" data-minlength="6" class="form-control" required id="id_password" placeholder="123456" >
+                      <input type="password" name="password" class="form-control" required id="id_password" placeholder="123456" >
                       <div class="help-block with-errors"></div>
                     </div>
 
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Отправить</button>
+                      <button type="submit" class="btn btn-primary" formaction="{% url 'log_in' %}">Отправить</button>
                     </div>
                   </form>
 

@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^$', store.views.index, name='home'),
     url(r'^$', store.views.register, name='registration'),
     url(r'^logout$', store.views.log_out, name='logout'),
+    url(r'^log_in$', store.views.log_in, name='log_in'),
     #url(r'^login$', store.views.Login, name='login'),
     url(r'^add$', store.views.add, name = 'add'),
     url(r'^item/(?P<prod_id>[0-9]+)/$',store.views.item, name = 'detail'),
