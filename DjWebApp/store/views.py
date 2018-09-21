@@ -30,9 +30,8 @@ def index(request):
         user.save()
 
         user = authenticate(request, username=username, password=password)
-        print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл22 '+ 'username '+username+' password '+password+' user '+user)
         if user is not None:
-            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл222')
+            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёлind')
             if user.is_active:
                 login(request, user)
                 return render(request, 'store/addproduct.html', {"form": form})
@@ -50,51 +49,18 @@ def index(request):
         # Return an 'invalid login' error message.
 
 def log_in(request):
-    print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл2')
-    form = UserForm(request.POST or None)
+    #form = UserForm(request.POST or None)
     username = request.POST['username']
     password = request.POST['password']
 
-    if form.is_valid():
+    if request.method == "POST":
         authuser = authenticate(username=username, password=password)
-        print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл22 '+ 'username '+username+' password '+password+' user ')
         if authuser is not None:
-            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл222')
             if authuser.is_active:
                 login(request, authuser)
-                return render(request, 'store/addproduct.html', {"form": form})
+                return render(request, 'store/addproduct.html')
         else:
             print(' authuserUser is None')
-
-
-#        username = request.POST['username']
-#        password = request.POST['password']
-#        user = authenticate(request, username=username, password=password)
-#        if user is not None:
-#                Login(request, user)
-#            print(user.is_uathenticated)
-#            return redirect ('/addproduct.html')
-
-
-
-#def login(request):
-#        if request.method == "POST":
-#            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл2')
-#            print(user.is_uathenticated)
-#            username = request.POST['username']
-#            password = request.POST['password']
-#            user = authenticate(username=username, password=password)
-#            if user is not None:
-#                if user.is_active:
-#                    Login(request, user)
-#                print(user.is_uathenticated)
-#                return redirect ('/addproduct.html')
-#    context = {
- #        'all_products': all_products, "form": form,
- #        }
-
-
-
     #template = loader.get_template('store/index.html')
  #       context = {
  #        'all_products': all_products, "form": form,
