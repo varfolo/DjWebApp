@@ -49,6 +49,17 @@ $(document).ready(function(){
 
 </body>
 
+
+    {% if all_products %}
+        <ul>
+            {% for product in all_products %}
+            <li><a href="/item/{{ product.id }}/">{{ product.productName }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>There is no products in the databade</h3>
+    {% endif %}
+
 {% endblock %}
 
 

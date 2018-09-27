@@ -50,17 +50,21 @@ def index(request):
 
 def log_in(request):
     #form = UserForm(request.POST or None)
-    username = request.POST['username']
-    password = request.POST['password']
-
     if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
         authuser = authenticate(username=username, password=password)
         if authuser is not None:
             if authuser.is_active:
                 login(request, authuser)
                 return render(request, 'store/addproduct.html')
+            else:
+                return render(request, 'store/Error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
-            print(' authuserUser is None')
+            return redirect('/error', {'error_message': 'Такой пользователь не существует'})
+    return render(request, 'store/index.html')
+
+
     #template = loader.get_template('store/index.html')
  #       context = {
  #        'all_products': all_products, "form": form,
@@ -74,8 +78,6 @@ def log_in(request):
   #      html += '<a href="' + url + '">' + product.productName + '</a><br>'
   #  return HttpResponse(html)
   #  return HttpResponse(template.render(context, request))
-
-
 
 def add(request):
     if request.method =='POST':
@@ -106,23 +108,6 @@ def item(request, prod_id):
     return render(request,'store/item.html', contextItem)
    # return HttpResponse("<h2>Здесть можно увидеть детали интересующих товарров</h2>" + str(prod_id))
 
-#def login_user(request):
-#    if request.method == "POST":
-#        username = request.POST['username']
-#        password = request.POST['password']
-#        user = authenticate(username=username, password=password)
-#        if user is not None:
-#            if user.is_active:
-#                login(request, user)
-#                albums = Album.objects.filter(user=request.user)
-#                return render(request, 'store/index.html', {'albums': albums})
-#            else:
-#                return render(request, 'music/login.html', {'error_message': 'Your account has been disabled'})
-#        else:
-#            return render(request, 'music/login.html', {'error_message': 'Invalid login'})
-#    return render(request, 'music/login.html')
-
-
 def register(request):
     form = UserForm(request.POST or None)
     if form.is_valid():
@@ -148,3 +133,9 @@ def log_out(request):
    # return HttpResponse("store/addproduct.html")
     #return render(request, 'store/addproduct.html')
     return redirect('/add')
+
+def error(request):
+
+    return render(request, 'store/error.html')
+
+

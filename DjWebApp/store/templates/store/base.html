@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     {% load staticfiles %}   
-    <link rel="stylesheet" type="text/css" href="{% static 'store/content/bootstrap.min.css' %}" />
+
+   <script src="{% static 'store/scripts/bootstrap.mmin.js' %}"></script>
+   <!-- <link rel="stylesheet" type="text/css" href="{% static 'store/content/bootstrap.min.css' %}" /> -->   
+        <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+        <script src="{% static 'app/scripts/bootstrap.min.js' %}"></script>
+
+
+
     <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
     <!--<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>-->
     <link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}"/>
+
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
     <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
 </head>
@@ -205,17 +213,9 @@
 
 
 
-<!--<script src="{% static 'store/scripts/bootstrap.mmin.js' %}"></script>-->
 
-    {% if all_products %}
-        <ul>
-            {% for product in all_products %}
-            <li><a href="/item/{{ product.id }}/">{{ product.productName }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>There is no products in the databade</h3>
-    {% endif %}
+
+
 
 
       

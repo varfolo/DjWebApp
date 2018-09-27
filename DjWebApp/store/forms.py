@@ -18,9 +18,9 @@ class UserForm(forms.ModelForm):
 
         class Meta:
             model = User
-            fields = ['username', 'email', 'password', , 'password2']
+            fields = ['username', 'email', 'password']#, 'password2']
             labels = { 
-                'username': 'Имя', 'email': 'Адрес электронной почты', 'password': 'Пароль', 'password2': 'Пароль'
+                'username': 'Имя', 'email': 'Адрес электронной почты', 'password': 'Пароль'#, 'password2': 'Пароль'
                 }
 
                         
