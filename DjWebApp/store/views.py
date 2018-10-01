@@ -56,7 +56,7 @@ def log_in(request):
     password = request.POST['password']
 
     if form.is_valid():
-        authuser = authenticate(username=username, password=password)
+        authuser = authenticate(request, username=username, password=password)
         print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл22 '+ 'username '+username+' password '+password+' user ')
         if authuser is not None:
             print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёл222')
