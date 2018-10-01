@@ -88,7 +88,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'OPTIONS': {
-            'options': '-c search_path=site2'
+            'options': '-c search_path=site'
         },
         'NAME': 'DBWebApp',
         'USER': 'postgres',

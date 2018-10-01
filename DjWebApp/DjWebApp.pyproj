@@ -118,6 +118,7 @@
     <Content Include="store\templates\store\index.html" />
     <Content Include="store\templates\store\Index3.html" />
     <Content Include="store\templates\store\item.html" />
+    <Content Include="store\templates\store\error.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.html">
