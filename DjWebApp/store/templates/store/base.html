@@ -1,22 +1,23 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     {% load staticfiles %}   
 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="{% static 'store/scripts/bootstrap.mmin.js' %}"></script>
-   <!-- <link rel="stylesheet" type="text/css" href="{% static 'store/content/bootstrap.min.css' %}" /> -->   
         <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
         <script src="{% static 'app/scripts/bootstrap.min.js' %}"></script>
 
 
-
     <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
-    <!--<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>-->
     <link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}"/>
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
-    <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+    {% block head %}{% endblock %}
+
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -69,7 +70,7 @@
 
                     <li class="">
                         <a href="{% url 'logout' %}">
-                            <span class="glyphicon glyphicon-plus" aria-hidden ="true"></span>&nbsp;
+                            <span class="glyphicon glyphicon-share" aria-hidden ="true"></span>&nbsp;
                             Выход | {{ user }}
                         </a>
                     </li>
@@ -82,7 +83,7 @@
                     </li>
                     <li class="">
                         <a href="#" data-toggle="modal" data-target="#authForm">
-                            <span class="glyphicon glyphicon-plus" aria-hidden ="true"></span>&nbsp;
+                            <span class="glyphicon glyphicon-log-in" aria-hidden ="true"></span>&nbsp;
                             Войти 
                         </a>
                     </li>
@@ -205,6 +206,7 @@
     </div>
   </div>
 
+<br>
 
 {% block body %}
 {% endblock %}

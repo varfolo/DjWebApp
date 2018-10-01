@@ -57,11 +57,11 @@ def log_in(request):
         if authuser is not None:
             if authuser.is_active:
                 login(request, authuser)
-                return render(request, 'store/addproduct.html')
+                return render(request, 'store/index.html')
             else:
                 return render(request, 'store/Error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
-            return redirect('/error', {'error_message': 'Такой пользователь не существует'})
+           return render(request, 'store/error.html', {'error_message': 'Такой пользователь не существует'})
     return render(request, 'store/index.html')
 
 
