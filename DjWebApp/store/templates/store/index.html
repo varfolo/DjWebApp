@@ -25,26 +25,31 @@
         $("#myModal").modal('show');
         });
         });
-    </script>0
+    </script>
 {% endblock %}
 
 
 {% block body %}
-
- <div id="map" style="height:300px" class="container-fluid">
-    </div><br>
-
-
-
-    {% if all_products %}
-        <ul>
-            {% for product in all_products %}
-            <li><a href="/item/{{ product.id }}/">{{ product.productName }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h3>There is no products in the databade</h3>
-    {% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map" style="height:500px"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% if all_products %}
+                <ul>
+                    {% for product in all_products %}
+                    <li><a href="/item/{{ product.id }}/">{{ product.productName }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h3>There is no products in the databade</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
