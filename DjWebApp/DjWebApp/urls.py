@@ -25,7 +25,7 @@ import app.views
 urlpatterns = [
     # Examples:
     url(r'^$', store.views.index, name='home'),
-    url(r'^$', store.views.register, name='registration'),
+    url(r'^registration', store.views.registration, name='registration'),
     url(r'^logout$', store.views.log_out, name='logout'),
     url(r'^error$', store.views.error, name='error'),
     url(r'^log_in$', store.views.log_in, name='log_in'),

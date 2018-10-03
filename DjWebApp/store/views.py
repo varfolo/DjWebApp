@@ -22,31 +22,8 @@ def index(request):
 
     form = UserForm(request.POST or None)
     all_products = UserProduct.objects.all()
-    if form.is_valid():
-        user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user.set_password(password)
-        user.save()
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            print('№№№№№№№№№№№№№№№№№№№№№№№№№№№ Зашёлind')
-            if user.is_active:
-                login(request, user)
-                return render(request, 'store/addproduct.html', {"form": form})
     return render(request,'store/index.html', {"form": form})
-
-
-  #  username = request.POST['username']
-  #  password = request.POST['password']
-  #  user = authenticate(request, username=username, password=password)
-  #  if user is not None:
-  #      login(request, user)
-  #      # Redirect to a success page.
-  #      ...
-  #  else:
-        # Return an 'invalid login' error message.
 
 def log_in(request):
     #form = UserForm(request.POST or None)
@@ -108,24 +85,22 @@ def item(request, prod_id):
     return render(request,'store/item.html', contextItem)
    # return HttpResponse("<h2>Здесть можно увидеть детали интересующих товарров</h2>" + str(prod_id))
 
-def register(request):
+def registration(request):
     form = UserForm(request.POST or None)
+    all_products = UserProduct.objects.all()
     if form.is_valid():
         user = form.save(commit=False)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         user.set_password(password)
         user.save()
-        user = authenticate(username=username, password=password)
+
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                albums = Album.objects.filter(user=request.user)
-                return render(request, 'music/index.html', {'albums': albums})
-    context = {
-        "form": form,
-    }  
-    return render(request, 'store/index.html', context)
+                return render(request, 'store/addproduct.html', {"form": form})
+    return render(request,'store/index.html', {"form": form}) 
 
 def log_out(request):
     logout(request)
