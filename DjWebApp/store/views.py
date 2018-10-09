@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views import generic
 from django.views.generic import View
 from store.forms import UserForm
+from django.contrib.auth.models import User
 
  #if 'email' in self.cleaned_data and 'email2' in self.cleaned_data:
  #           if self.cleaned_data['email'] != self.cleaned_data['email2']:
@@ -92,14 +93,23 @@ def registration(request):
         user = form.save(commit=False)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
-        user.set_password(password)
-        user.save()
+        print("1-----------------------username-----------------: "+username+" "+str(user.pk))
+        #if User.objects.exclude(pk=user.instace.pk).filter(username=username).exists():
+        #if User.objects.exclude(pk=request.user.pk).filter(username=username).exists():
+            #raise forms.ValidationError(u'Username "%s" is already in use.' % username)
+        #user.set_password(password)
+       # user.save()
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
                 return render(request, 'store/addproduct.html', {"form": form})
+        else:
+            print("1 Ошибка в форме "+str(form.errors))
+    else:
+        print("2 Ошибка в форме "+str(form.errors))
+        return render(request, 'store/error.html', {'form': form})
     return render(request,'store/index.html', {"form": form}) 
 
 def log_out(request):

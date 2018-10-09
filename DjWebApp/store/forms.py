@@ -22,5 +22,9 @@ class UserForm(forms.ModelForm):
             labels = { 
                 'username': 'Имя', 'email': 'Адрес электронной почты', 'password': 'Пароль'#, 'password2': 'Пароль'
                 }
-
+        def clean_username(self):
+            username = self.cleaned_data['username']
+            if "waw" == username:
+                raise forms.ValidationError("К сожалению, пользователь с таким именем уже есть в системе")
+            return username    
                         
