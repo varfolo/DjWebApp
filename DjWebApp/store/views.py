@@ -105,8 +105,10 @@ def registration(request):
             if user.is_active:
                 login(request, user)
                 return render(request, 'store/addproduct.html', {"form": form})
+            else:
+                return render(request, 'store/error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
-            print("1 Ошибка в форме "+str(form.errors))
+           return render(request, 'store/error.html', {'error_message': 'Такой пользователь не существует2'})
     else:
         print("2 Ошибка в форме "+str(form.errors))
         return render(request, 'store/error.html', {'form': form})

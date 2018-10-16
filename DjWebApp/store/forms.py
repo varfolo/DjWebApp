@@ -24,7 +24,10 @@ class UserForm(forms.ModelForm):
                 }
         def clean_username(self):
             username = self.cleaned_data['username']
-            if "waw" == username:
-                raise forms.ValidationError("К сожалению, пользователь с таким именем уже есть в системе")
+                    #if User.objects.exclude(pk=user.instace.pk).filter(username=username).exists():
+            #if "waw" == username:
+            #if User.objects.exclude(pk=self.instace.pk).filter(username=username).exists():
+            if User.objects.filter(username=username).exists():
+                raise forms.ValidationError("К сожалению, пользователь с таким именем уже зарегистрирован в системе")
             return username    
                         
