@@ -14,13 +14,14 @@ class ProductApplyForm(forms.Form):
 
 class UserForm(forms.ModelForm):
         password = forms.CharField(widget = forms.PasswordInput(attrs={'class':'form-control'}), label="Пароль")
+        password2 = forms.CharField(widget = forms.PasswordInput(attrs={'class':'form-control'}), label="Пароль")
 #        email = forms.CharField(widget = forms.EmailInput(attrs={'class':'form-control'}), label="Адрес электронной почты")
 
         class Meta:
             model = User
-            fields = ['username', 'email', 'password']#, 'password2']
+            fields = ['username', 'email', 'password', 'password2']
             labels = { 
-                'username': 'Имя', 'email': 'Адрес электронной почты', 'password': 'Пароль'#, 'password2': 'Пароль'
+                'username': 'Имя', 'email': 'Адрес электронной почты', 'password': 'Пароль', 'password2': 'Повторный пароль'
                 }
         def clean_username(self):
             username = self.cleaned_data['username']
@@ -30,4 +31,9 @@ class UserForm(forms.ModelForm):
             if User.objects.filter(username=username).exists():
                 raise forms.ValidationError("К сожалению, пользователь с таким именем уже зарегистрирован в системе")
             return username    
-                        
+
+        def clean_email(self):
+            email = self.cleaned_data['email']
+            if User.objects.filter(email=email).exists():
+                raise forms.ValidationError("К сожалению, пользователь с такой электронной почтой уже зарегистрирован в системе")
+            return email 

@@ -12,12 +12,6 @@ from django.views.generic import View
 from store.forms import UserForm
 from django.contrib.auth.models import User
 
- #if 'email' in self.cleaned_data and 'email2' in self.cleaned_data:
- #           if self.cleaned_data['email'] != self.cleaned_data['email2']:
- #               raise forms.ValidationError(_(u'You must type the same email each time'))
- #       return self.cleaned_data
-
-
 
 def index(request):
 
@@ -70,8 +64,7 @@ def add(request):
             Product.Category = data['category']
             Product.image = request.FILES['image']#data['image']
             Product.save()
-
-            return redirect ('/add')
+        return redirect ('/add')
     else:
         SGForm = ProductApplyForm()
     context ={'SGForm': SGForm}
@@ -88,29 +81,30 @@ def item(request, prod_id):
 
 def registration(request):
     form = UserForm(request.POST or None)
-    all_products = UserProduct.objects.all()
+   # all_products = UserProduct.objects.all()
     if form.is_valid():
         user = form.save(commit=False)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
-        print("1-----------------------username-----------------: "+username+" "+str(user.pk))
-        #if User.objects.exclude(pk=user.instace.pk).filter(username=username).exists():
-        #if User.objects.exclude(pk=request.user.pk).filter(username=username).exists():
-            #raise forms.ValidationError(u'Username "%s" is already in use.' % username)
-        #user.set_password(password)
-       # user.save()
+        password2 = form.cleaned_data['password2']
 
+        if 'password' in form.cleaned_data and 'password2' in form.cleaned_data:
+            if form.cleaned_data['password'] != form.cleaned_data['password2']:
+                #raise forms.ValidationError(u'You must type the same email each time')
+               return render(request, 'store/error.html', {'error_message': 'Пароли не совпадают'})
+
+        user.set_password(password)
+        user.save
         user = authenticate(request, username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'store/addproduct.html', {"form": form})
+                return render(request, 'store/index.html', {"form": form})
             else:
                 return render(request, 'store/error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
-           return render(request, 'store/error.html', {'error_message': 'Такой пользователь не существует2'})
+           return render(request, 'store/error.html', {'error_message': 'Такой пользователь не существует'})
     else:
-        print("2 Ошибка в форме "+str(form.errors))
         return render(request, 'store/error.html', {'form': form})
     return render(request,'store/index.html', {"form": form}) 
 
@@ -118,11 +112,10 @@ def log_out(request):
     logout(request)
     # Перенаправление на страницу.
    # return HttpResponse("store/addproduct.html")
-    #return render(request, 'store/addproduct.html')
-    return redirect('/add')
+    return render(request, 'store/index.html')
+    #return redirect('/home')
 
 def error(request):
-
     return render(request, 'store/error.html')
 
 
