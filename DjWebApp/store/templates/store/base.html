@@ -302,7 +302,7 @@ desired effect
         <div class="container">
           <div class="row">
             <div class="col-md-3">
-              <form data-toggle="validator" role="form" method="post" >
+              <form data-toggle="validator" role="form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                   <label for="id_username" class="control-label">Ваше имя</label>
@@ -327,6 +327,11 @@ desired effect
                       <div class="help-block with-errors"></div>
                     </div>
 
+                    <div class="form-group">
+                      <label for="id_userPic" class="control-label">Ваш аватар</label>
+                      <input type="file" name="userPic" required id="id_userPic"/>
+                    </div>
+                    
                     <div class="form-group">
                       <button type="submit" class="btn btn-primary" formaction="{% url 'registration' %}">Отправить</button>
                     </div>

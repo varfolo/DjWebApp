@@ -15,14 +15,16 @@ class ProductApplyForm(forms.Form):
 class UserForm(forms.ModelForm):
         password = forms.CharField(widget = forms.PasswordInput(attrs={'class':'form-control'}), label="Пароль")
         password2 = forms.CharField(widget = forms.PasswordInput(attrs={'class':'form-control'}), label="Пароль")
+        userPic = forms.FileField()
 #        email = forms.CharField(widget = forms.EmailInput(attrs={'class':'form-control'}), label="Адрес электронной почты")
 
         class Meta:
             model = User
-            fields = ['username', 'email', 'password', 'password2']
+            fields = ['username', 'email', 'password', 'password2', 'userPic']
             labels = { 
-                'username': 'Имя', 'email': 'Адрес электронной почты', 'password': 'Пароль', 'password2': 'Повторный пароль'
+                'username': 'Имя', 'email': 'Адрес электронной почты', 'password': 'Пароль', 'password2': 'Повторный пароль', 'userPic': 'Аватар пользователя'
                 }
+ 
         def clean_username(self):
             username = self.cleaned_data['username']
                     #if User.objects.exclude(pk=user.instace.pk).filter(username=username).exists():

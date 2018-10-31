@@ -80,13 +80,14 @@ def item(request, prod_id):
    # return HttpResponse("<h2>Здесть можно увидеть детали интересующих товарров</h2>" + str(prod_id))
 
 def registration(request):
-    form = UserForm(request.POST or None)
+    form = UserForm(request.POST or None, request.FILES)
    # all_products = UserProduct.objects.all()
     if form.is_valid():
         user = form.save(commit=False)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         password2 = form.cleaned_data['password2']
+        userPic = request.FILES['userPic']
 
         if 'password' in form.cleaned_data and 'password2' in form.cleaned_data:
             if form.cleaned_data['password'] != form.cleaned_data['password2']:
@@ -94,7 +95,7 @@ def registration(request):
                return render(request, 'store/error.html', {'error_message': 'Пароли не совпадают'})
 
         user.set_password(password)
-        user.save
+        user.save()
         user = authenticate(request, username=username, password=password)
         if user is not None:
             if user.is_active:
@@ -106,7 +107,8 @@ def registration(request):
            return render(request, 'store/error.html', {'error_message': 'Такой пользователь не существует'})
     else:
         return render(request, 'store/error.html', {'form': form})
-    return render(request,'store/index.html', {"form": form}) 
+   # return render(request,'store/index.html', {"form": form}) 
+    return redirect ('/registration')
 
 def log_out(request):
     logout(request)
