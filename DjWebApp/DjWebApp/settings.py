@@ -90,10 +90,10 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=site'
         },
-        'NAME': 'DBWebApp',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'NAME': 'xgb_assdb',
+        'USER': 'xgb_assdb',
+        'PASSWORD': 'e652f6bauiw',
+        'HOST': 'postgres64.1gb.ru',
         'PORT': '5432',
     }
 }
