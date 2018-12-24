@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    {% load staticfiles %}   
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <script src="{% static 'app/scripts/bootstrap.min.js' %}"></script>
+
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'store/style.css' %}"/>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+        <!--Logo-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">Главная</a>
+        </div>
+
+        <!--Items-->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-home" aria-hidden ="true"></span>&nbsp;
+                        Home
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'home' %}">
+                        <span class="glyphicon glyphicon-home" aria-hidden ="true"></span>&nbsp;
+                        Home
+                    </a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="" />
+                </div>
+                    <button type="submit" class="btn btn-default">Поиск</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li class="">
+                      <a href="{% url 'add' %}">
+                          <span class="glyphicon glyphicon-plus" aria-hidden ="true"></span>&nbsp;
+                          Добавить
+                      </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'logout' %}">
+                            <span class="glyphicon glyphicon-share" aria-hidden ="true"></span>&nbsp;
+                            Выход | {{ user }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="">
+                        <a href="#" data-toggle="modal" data-target="#regForm">
+                            <span class="glyphicon glyphicon-edit" aria-hidden ="true"></span>&nbsp;
+                            Регистрация
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" data-toggle="modal" data-target="#authForm">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden ="true"></span>&nbsp;
+                            Войти 
+                        </a>
+                    </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+  <div class="modal fade" id="regForm" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog  modal-sm">
+        <div class="modal-content">
+          <!-- Заголовок модального окна -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Создать учётную запись</h4>
+          </div>
+
+          <!-- Основное содержимое модального окна -->
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <form data-toggle="validator" role="form" method="post" >
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="id_username" class="control-label">Ваше имя</label>
+                      <input type="text" name="username" class="form-control" required id="id_username" placeholder="Введите Ваше имя">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="id_email" class="control-label">Ваш E-mail</label>
+                      <input type="email" name="email" class="form-control" id="id_email" placeholder="Email" data-error="Вы не правильно ввели Ваш E-mail" required>
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="id_password" class="control-label">Введите пароль</label>
+                      <input type="password" name="password" data-toggle="validator" data-minlength="6" class="form-control" required id="id_password" placeholder="123456" >
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="id_password" class="control-label">Повторите пароль</label>
+                      <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#id_password2" data-match-error="Ошибка! Пароли не совпадают!" placeholder="Повторите пароль" required>
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary" formaction="{% url 'registration' %}">Отправить</button>
+                    </div>
+                  </form>
+
+                  <div class="panel-footer">
+                    Уже есть учётная запись? <a href="#">Нажмите здесь</a> чтобы войти.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Футер модального окна -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="authForm" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog  modal-sm">
+        <div class="modal-content">
+          <!-- Заголовок модального окна -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Войти на сайт</h4>
+          </div>
+
+          <!-- Основное содержимое модального окна -->
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <form data-toggle="validator" role="form" method="post" >
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                      <label for="id_username" class="control-label">Ваше имя</label>
+                      <input type="text" name="username" class="form-control" required id="id_username" placeholder="Введите Ваше имя">
+                    </div>
+                     <!--data-toggle="validator" data-minlength="6"--> 
+                    <div class="form-group">
+                      <label for="id_password" class="control-label">Введите пароль</label>
+                      <input type="password" name="password" class="form-control" required id="id_password" placeholder="123456" >
+                      <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary" formaction="{% url 'log_in' %}">Отправить</button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Футер модального окна -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+{% block body %}
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+      
+
+
+
