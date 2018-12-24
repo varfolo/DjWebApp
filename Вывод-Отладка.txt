@@ -1,0 +1,53 @@
+﻿Performing system checks...
+System check identified no issues (0 silenced).
+
+You have 2 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): store.
+Run 'python manage.py migrate' to apply them.
+January 06, 2019 - 14:53:30
+Django version 2.1.1, using settings 'DjWebApp.settings'
+Starting development server at http://127.0.0.1:49256/
+Quit the server with CTRL-BREAK.
+Поток 0x2 завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:31] "GET / HTTP/1.1" 200 17337
+
+Поток 0x3 завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:31] "GET /static/store/content/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 31004
+
+[06/Jan/2019 14:53:31] "GET /static/store/content/dist/css/AdminLTE.min.css HTTP/1.1" 200 91507
+
+Поток 0x4 завершился с кодом 0 (0x0).
+Поток 0x5 завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:31] "GET /static/store/content/bootstrap/dist/js/bootstrap.min.js HTTP/1.1" 200 37051
+
+[06/Jan/2019 14:53:31] "GET /static/store/content/dist/css/skins/skin-blue.min.css HTTP/1.1" 200 3156
+Поток 0x9 завершился с кодом 0 (0x0).
+
+Поток 0x6 завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:31] "GET /static/store/content/bootstrap/dist/css/bootstrap.min.css HTTP/1.1" 200 121205
+
+Not Found: /dist/img/user2-160x160.jpg
+
+[06/Jan/2019 14:53:31] "GET /static/store/content/jquery/dist/jquery.min.js HTTP/1.1" 200 86929
+
+Поток 0x7 завершился с кодом 0 (0x0).
+Поток 0x8 завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:31] "GET /dist/img/user2-160x160.jpg HTTP/1.1" 404 3295
+
+Поток 0xa завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:31] "GET /static/store/content/dist/img/NonameUser.jpg HTTP/1.1" 200 4764
+
+Поток 0xb завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:31] "GET /static/store/content/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 77160
+
+Поток 0xc завершился с кодом 0 (0x0).
+[06/Jan/2019 14:53:32] "GET /static/store/content/dist/js/adminlte.min.js HTTP/1.1" 200 14491
+
+Поток 0xd завершился с кодом 0 (0x0).
+Поток 0xe завершился с кодом 0 (0x0).
+Not Found: /favicon.ico
+
+[06/Jan/2019 14:53:34] "GET /favicon.ico HTTP/1.1" 404 3250
+
+Поток 0xf завершился с кодом 0 (0x0).
+Поток 0x10 завершился с кодом 0 (0x0).
+Программа "python.exe" завершилась с кодом -1 (0xffffffff).
