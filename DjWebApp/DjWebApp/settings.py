@@ -26,7 +26,7 @@ SECRET_KEY = 'fa794d5c-e6ca-4d2d-9e2e-d7992604f4f4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'droneplanner.ru', 'www.droneplanner.ru', 'дронзона.рф', 'дронзона.рф', 'xn--80ahjxbdcm.xn--p1ai']
 
 
 # Application definition
@@ -138,6 +138,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
-
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+#    '/http/static/',
+#]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = '/http/media/'
