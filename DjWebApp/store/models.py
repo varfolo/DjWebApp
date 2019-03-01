@@ -17,16 +17,17 @@ class UserProduct(models.Model):
     def __str__(self):
         return self.productName
  
-## Расщирение модели пользователя
-#class Profile(models.Model):
-#    user = models.OneToOneField(User, primary_key = True)
-#    userPic = models.FileField(blank=True, upload_to='store/images/',default='noimage')
+# Расщирение модели пользователя
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    userPic = models.FileField(blank=True, upload_to='account/images',default='account/images/NonameUser.jpg')
+    location = models.CharField(max_length=30, blank=True)
 
-#    @receiver(post_save, sender=User)
-#    def create_user_profile(sender, instance, created, **kwargs):
-#        if created:
-#          Profile.objects.create(user=instance)
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+          Profile.objects.create(user=instance)
 
-#    @receiver(post_save, sender=User)
-#    def save_user_profile(sender, instance, **kwargs):
-#        instance.profile.save()
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()

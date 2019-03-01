@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from store.forms import ProductApplyForm
 from django.template import RequestContext
-from store.models import UserProduct
+from store.models import UserProduct, Profile
 from django.http import HttpResponse
 from django.template import loader
 from django.http import Http404
@@ -81,13 +81,11 @@ def item(request, prod_id):
 
 def registration(request):
     form = UserForm(request.POST or None, request.FILES)
-   # all_products = UserProduct.objects.all()
     if form.is_valid():
         user = form.save(commit=False)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         password2 = form.cleaned_data['password2']
-        userPic = request.FILES['userPic']
 
         if 'password' in form.cleaned_data and 'password2' in form.cleaned_data:
             if form.cleaned_data['password'] != form.cleaned_data['password2']:
@@ -97,6 +95,10 @@ def registration(request):
         user.set_password(password)
         user.save()
         user = authenticate(request, username=username, password=password)
+
+        userP = User.objects.get(pk=user.pk)
+        userP.profile.userPic = request.FILES['userPic']
+        userP.save()
         if user is not None:
             if user.is_active:
                 login(request, user)
