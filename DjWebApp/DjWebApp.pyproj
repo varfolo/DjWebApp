@@ -379,10 +379,10 @@
     <Content Include="store\templates\store\addproduct2.html" />
     <Content Include="store\templates\store\base.html" />
     <Content Include="store\templates\store\base2.html" />
+    <Content Include="store\templates\store\error.html" />
     <Content Include="store\templates\store\FillGoodForm2.html" />
     <Content Include="store\templates\store\index.html" />
     <Content Include="store\templates\store\item.html" />
-    <Content Include="store\templates\store\error.html" />
     <Content Include="store\templates\store\lk.html" />
     <Content Include="store\templates\store\LoginAsidePartial.html" />
   </ItemGroup>

@@ -11,6 +11,8 @@ from django.views import generic
 from django.views.generic import View
 from store.forms import UserForm
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -29,7 +31,8 @@ def log_in(request):
         if authuser is not None:
             if authuser.is_active:
                 login(request, authuser)
-                return render(request, 'store/index.html')
+                user_id=authuser.id
+                return HttpResponseRedirect(reverse ('account', args=(user_id,)))
             else:
                 return render(request, 'store/Error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
@@ -90,7 +93,7 @@ def registration(request):
         if 'password' in form.cleaned_data and 'password2' in form.cleaned_data:
             if form.cleaned_data['password'] != form.cleaned_data['password2']:
                 #raise forms.ValidationError(u'You must type the same email each time')
-               return render(request, 'store/error.html', {'error_message': 'Пароли не совпадают'})
+              return render(request, 'store/error.html', {'error_message': 'Пароли не совпадают'})
 
         user.set_password(password)
         user.save()
@@ -102,7 +105,8 @@ def registration(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'store/index.html', {"form": form})
+                #return render(request, 'store/index.html', {"form": form})               args=('2')
+                return HttpResponseRedirect(reverse ('account', args=(user_id,)))
             else:
                 return render(request, 'store/error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
@@ -112,12 +116,15 @@ def registration(request):
    # return render(request,'store/index.html', {"form": form}) 
     return redirect ('/registration')
 
+def account(request, user_id):
+    return redirect('/')
+
 def log_out(request):
     logout(request)
     # Перенаправление на страницу.
    # return HttpResponse("store/addproduct.html")
-    return render(request, 'store/index.html')
-    #return redirect('/home')
+    #render(request, 'store/index.html')
+    return redirect('/')
 
 def error(request):
     return render(request, 'store/error.html')

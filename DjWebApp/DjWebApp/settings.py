@@ -84,33 +84,33 @@ WSGI_APPLICATION = 'DjWebApp.wsgi.application'
 #        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #    }
 #} 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'OPTIONS': {
-##            'options': '-c search_path=site'
-#        },
-#        'NAME': 'xgb_assdb',
-#        'USER': 'xgb_assdb',
-##        'PASSWORD': 'e652f6bauiw',
-#        'HOST': 'postgres64.1gb.ru',
-#        'PORT': '5432',
-#    }
-#}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'OPTIONS': {
             'options': '-c search_path=site'
         },
-        'NAME': 'DBWebApp',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'NAME': 'xgb_assdb',
+        'USER': 'xgb_assdb',
+        'PASSWORD': 'e652f6bauiw',
+        'HOST': 'postgres64.1gb.ru',
         'PORT': '5432',
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'OPTIONS': {
+#            'options': '-c search_path=site'
+#        },
+#        'NAME': 'DBWebApp',
+#        'USER': 'postgres',
+#        'PASSWORD': 'postgres',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
+#}
 
 
 # Password validation

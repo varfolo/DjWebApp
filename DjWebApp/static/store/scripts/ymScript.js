@@ -13,14 +13,6 @@ function init() {
             coordinates: [55.9, 37.8] // координаты точки
         }
     });
-
-    var myCircle = new ymaps.GeoObject({
-        geometry: {
-            type: "Circle",
-            coordinates: [55.76, 37.64],
-            radius: 10000
-        }
-    });
     // Размещение геообъекта на карте.
     myMap.geoObjects.add(myGeoObject);
     myMap.geoObjects.add(myCircle);
