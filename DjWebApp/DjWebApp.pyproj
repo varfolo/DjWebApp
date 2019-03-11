@@ -373,7 +373,7 @@
     <Content Include="store\static\store\content\site.css" />
     <Content Include="store\static\store\images\background.png" />
     <Content Include="store\static\store\scripts\bootstrap.min.js" />
-    <Content Include="store\static\store\scripts\ymScrips.js" />
+    <Content Include="store\static\store\scripts\ymScripts.js" />
     <Content Include="store\static\store\style.css" />
     <Content Include="store\templates\store\addproduct.html" />
     <Content Include="store\templates\store\addproduct2.html" />
