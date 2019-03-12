@@ -32,7 +32,8 @@ def log_in(request):
             if authuser.is_active:
                 login(request, authuser)
                 user_id=authuser.id
-                return HttpResponseRedirect(reverse ('account', args=(user_id,)))
+                #return HttpResponseRedirect(reverse ('account', args=(user_id,)))
+                return redirect('/')
             else:
                 return render(request, 'store/Error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
@@ -106,7 +107,8 @@ def registration(request):
             if user.is_active:
                 login(request, user)
                 #return render(request, 'store/index.html', {"form": form})               args=('2')
-                return HttpResponseRedirect(reverse ('account', args=(user_id,)))
+                #return HttpResponseRedirect(reverse ('account', args=(user_id,)))
+                return redirect('/')
             else:
                 return render(request, 'store/error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
@@ -117,7 +119,12 @@ def registration(request):
     return redirect ('/registration')
 
 def account(request, user_id):
-    return redirect('/')
+    try:
+        userProfile = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        raise Http404("Пользователь не существует")
+    context ={'userProfile': userProfile, 'user_id':user_id}
+    return render(request, 'store/profile.html', context)
 
 def log_out(request):
     logout(request)

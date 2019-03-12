@@ -99,6 +99,7 @@
     <Folder Include="store\templates\store\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="store\templates\store\profile.html" />
     <None Include="CustomProfile.pubxml" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />

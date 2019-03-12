@@ -67,7 +67,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href={% url 'home' %} class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>M</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -178,7 +178,8 @@ desired effect
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
+                  <a href="/account/{{ user.id }}/" class="btn btn-default btn-flat">Профиль</a>
                 </div>
                 <div class="pull-right">
                   <a href="{% url 'logout' %}" class="btn btn-default btn-flat">Выход</a>
