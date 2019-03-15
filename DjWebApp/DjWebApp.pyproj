@@ -99,6 +99,8 @@
     <Folder Include="store\templates\store\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="store\static\store\pareas.json" />
+    <Content Include="store\static\store\scripts\ymScripts.js" />
     <Content Include="store\templates\store\profile.html" />
     <None Include="CustomProfile.pubxml" />
     <Content Include="requirements.txt" />
@@ -375,7 +377,6 @@
     <Content Include="store\static\store\images\background.png" />
     <Content Include="store\static\store\scripts\bootstrap.min.js" />
     <Content Include="store\static\store\scripts\data.json" />
-    <Content Include="store\static\store\scripts\ymScript.js" />
     <Content Include="store\static\store\style.css" />
     <Content Include="store\templates\store\addproduct.html" />
     <Content Include="store\templates\store\addproduct2.html" />

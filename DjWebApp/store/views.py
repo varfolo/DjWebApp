@@ -11,7 +11,7 @@ from django.views import generic
 from django.views.generic import View
 from store.forms import UserForm
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+#from django.core.urlresolvers import reverse - 15.03.2019 Строка закомментирована Константином. Срабатывала ошибка "Модуль не найден". В таксте модуль нигде не используется, все строки с его участием закомментированы.
 from django.http import HttpResponseRedirect
 
 
