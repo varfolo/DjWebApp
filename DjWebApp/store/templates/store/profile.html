@@ -1,0 +1,16 @@
+{% extends 'store/base.html' %}
+
+{% block body %}
+
+  <div class="row">
+      <h1>{{ userProfile.username }}</h1><br>
+        {% if userProfile.profile.userPic %}
+            <img src="/http/media/{{ userProfile.profile.userPic }}" class="img-circle" alt="User Image">
+        {% endif %} <br>
+      <h3>На сайте с  {{ userProfile.date_joined|date:"d.m.Y" }}</h3> <br>
+      <h3>Электронная почта: {{ userProfile.email }}</h3> <br>
+      <h3>Местоположение: {{ userProfile.profile.location }}</h3> <br>
+
+  </div>  
+
+{% endblock %}

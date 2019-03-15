@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from store.forms import ProductApplyForm
 from django.template import RequestContext
-from store.models import UserProduct
+from store.models import UserProduct, Profile
 from django.http import HttpResponse
 from django.template import loader
 from django.http import Http404
@@ -11,6 +11,8 @@ from django.views import generic
 from django.views.generic import View
 from store.forms import UserForm
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -29,7 +31,9 @@ def log_in(request):
         if authuser is not None:
             if authuser.is_active:
                 login(request, authuser)
-                return render(request, 'store/index.html')
+                user_id=authuser.id
+                #return HttpResponseRedirect(reverse ('account', args=(user_id,)))
+                return redirect('/')
             else:
                 return render(request, 'store/Error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
@@ -81,26 +85,30 @@ def item(request, prod_id):
 
 def registration(request):
     form = UserForm(request.POST or None, request.FILES)
-   # all_products = UserProduct.objects.all()
     if form.is_valid():
         user = form.save(commit=False)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         password2 = form.cleaned_data['password2']
-        userPic = request.FILES['userPic']
 
         if 'password' in form.cleaned_data and 'password2' in form.cleaned_data:
             if form.cleaned_data['password'] != form.cleaned_data['password2']:
                 #raise forms.ValidationError(u'You must type the same email each time')
-               return render(request, 'store/error.html', {'error_message': 'Пароли не совпадают'})
+              return render(request, 'store/error.html', {'error_message': 'Пароли не совпадают'})
 
         user.set_password(password)
         user.save()
         user = authenticate(request, username=username, password=password)
+
+        userP = User.objects.get(pk=user.pk)
+        userP.profile.userPic = request.FILES['userPic']
+        userP.save()
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'store/index.html', {"form": form})
+                #return render(request, 'store/index.html', {"form": form})               args=('2')
+                #return HttpResponseRedirect(reverse ('account', args=(user_id,)))
+                return redirect('/')
             else:
                 return render(request, 'store/error.html', {'error_message': 'Ваш аккаунт заблокирован'})
         else:
@@ -110,12 +118,20 @@ def registration(request):
    # return render(request,'store/index.html', {"form": form}) 
     return redirect ('/registration')
 
+def account(request, user_id):
+    try:
+        userProfile = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        raise Http404("Пользователь не существует")
+    context ={'userProfile': userProfile, 'user_id':user_id}
+    return render(request, 'store/profile.html', context)
+
 def log_out(request):
     logout(request)
     # Перенаправление на страницу.
    # return HttpResponse("store/addproduct.html")
-    return render(request, 'store/index.html')
-    #return redirect('/home')
+    #render(request, 'store/index.html')
+    return redirect('/')
 
 def error(request):
     return render(request, 'store/error.html')
