@@ -40,7 +40,6 @@ function init() {
     myMap.geoObjects.add(objectManager);
 
     $.ajax({
-        //url: "/static/store/scripts/data.json"
         url: "/static/store/data/pareas.json"
     }).done(function (data) {
         objectManager.add(data);
