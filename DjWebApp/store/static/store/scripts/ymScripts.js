@@ -24,7 +24,12 @@ function init() {
         zoom: 10
     }, {
             searchControlProvider: 'yandex#search'
-        }),
+        }
+        //,
+        //{
+        //    projection: ymaps.projection.sphericalMercator
+        //}
+    ),
         objectManager = new ymaps.ObjectManager({
             // Чтобы метки начали кластеризоваться, выставляем опцию.
             clusterize: false,
@@ -40,6 +45,7 @@ function init() {
     myMap.geoObjects.add(objectManager);
 
     $.ajax({
+        //url: "/static/store/scripts/data.json"
         url: "/static/store/data/pareas.json"
     }).done(function (data) {
         objectManager.add(data);

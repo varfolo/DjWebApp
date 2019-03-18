@@ -92,6 +92,7 @@
     <Folder Include="store\static\store\content\font-awesome\fonts\" />
     <Folder Include="store\static\store\content\font-awesome\less\" />
     <Folder Include="store\static\store\content\font-awesome\scss\" />
+    <Folder Include="store\static\store\data\" />
     <Folder Include="store\static\store\scripts\" />
     <Folder Include="store\static\store\images\" />
     <Folder Include="store\static\store\scripts\" />
@@ -99,6 +100,7 @@
     <Folder Include="store\templates\store\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="store\static\store\data\pareas.json" />
     <Content Include="store\static\store\pareas.json" />
     <Content Include="store\static\store\scripts\ymScripts.js" />
     <Content Include="store\templates\store\profile.html" />
